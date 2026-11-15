@@ -206,6 +206,44 @@ header{border-bottom:2px solid;border-image:linear-gradient(90deg,#00b4d0,#38d26
 .hint{font-size:12px;color:var(--m);margin-top:-6px}
 .av{background-size:cover;background-position:center}.av.img{color:transparent}
 .m{display:flex;gap:10px;align-items:flex-start}.m .av{width:28px;height:28px;font-size:12px;flex:none}.m .mb{min-width:0}
+
+.mi svg{width:14px;height:14px;color:var(--r);vertical-align:-2px;margin-left:5px}
+#dev{position:fixed;left:16px;bottom:14px;z-index:60}
+#devb{display:flex;align-items:center;gap:9px;background:#0d181acc;backdrop-filter:blur(10px);border:1px solid var(--b);color:var(--m);padding:6px 12px 6px 6px;border-radius:99px;font-size:12px}
+#devb:hover{border-color:#00b4d088;color:var(--t)}#devb b{color:var(--t)}
+.dav{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#00b4d0,#38d26a) center/cover;display:grid;place-items:center;color:#03191c;font-weight:700;font-size:12px;flex:none}
+.dav.big{width:64px;height:64px;font-size:26px;border:4px solid #0f1a1c;position:absolute;left:16px;top:34px}
+#devc{position:absolute;bottom:46px;left:0;width:260px;background:#0f1a1c;border:1px solid var(--b);border-radius:16px;overflow:hidden;box-shadow:0 20px 50px #000b;padding:106px 16px 16px;animation:fade .15s}
+.dban{position:absolute;left:0;right:0;top:0;height:56px;background:linear-gradient(90deg,#00b4d0,#38d26a 60%,#f8dd38)}
+.dn{font-weight:700;font-size:16px}.du{color:var(--m);font-size:13px}
+.ds{display:flex;align-items:center;gap:7px;font-size:12px;margin:10px 0 12px;color:#c2d6d4}.ds i{width:9px;height:9px;border-radius:50%}
+.dr{display:flex;gap:8px}.dr .btn{padding:8px 12px;font-size:13px;text-decoration:none;color:var(--t)}
+@media(max-width:900px){#room:not(.hide)~#dev{display:none}}
+
+#devc{width:300px}
+.dban{background:#0a0a0b;border-bottom:3px solid;border-image:linear-gradient(90deg,#00b4d0,#38d26a 60%,#f8dd38) 1}
+.sdot{position:absolute;left:66px;top:82px;width:18px;height:18px;border-radius:50%;border:3px solid #0f1a1c;z-index:2}
+.dbub{position:absolute;left:92px;right:12px;top:42px;background:#1d2326;border:1px solid var(--b);border-radius:14px;padding:6px 10px;font-size:12px;line-height:1.35}
+.du{display:flex;align-items:center}.dtag{background:#ffffff14;border-radius:6px;padding:1px 7px;font-size:11px;font-weight:700;margin-left:8px}
+.dl{font-size:11px;color:var(--m);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-top:12px}.dtx{font-size:13px;margin-top:2px}
+
+#devc{width:310px;padding:0;bottom:48px}
+.dban{position:relative;left:auto;right:auto;top:auto;height:92px;background:linear-gradient(#081214aa,#0f1a1c),url(/logo.png) center 28%/cover;border:0;border-image:none}
+.dhead{display:flex;align-items:flex-end;gap:12px;padding:0 18px;margin-top:-40px;position:relative}
+.avw{position:relative;flex:none;width:82px;height:82px}
+.dav.big{position:static;left:auto;top:auto;width:82px;height:82px;font-size:30px;border:5px solid #0f1a1c}
+.sdot{left:auto;top:auto;right:1px;bottom:1px;width:22px;height:22px;border:4px solid #0f1a1c}
+.dbub{position:relative;left:auto;right:auto;top:auto;flex:1;margin-bottom:6px;font-size:12.5px;padding:8px 12px;background:#182326}
+.dbody{padding:12px 18px 18px}
+.dn{font-size:21px;line-height:1.2}.du{margin-top:2px;font-size:14px}
+.ds{margin:10px 0 0}.dsep{height:1px;background:var(--b);margin:14px 0 4px}
+.dl{margin-top:14px}.dtx{font-size:14px;margin-top:3px}
+.dr{margin-top:18px}
+
+.demo{width:18px;height:18px;vertical-align:-4px;margin-right:4px}
+
+.tbd{width:14px;height:14px;vertical-align:-2px;margin-right:4px;border-radius:3px}
+.dtag{display:inline-flex;align-items:center}
 </style>
 </head>
 <body>
@@ -227,7 +265,7 @@ header{border-bottom:2px solid;border-image:linear-gradient(90deg,#00b4d0,#38d26
     <h2 class="ct">Entrar</h2>
     <p id="sub">Escolha um nome para ser identificado na sala.</p>
     <div class="nm"><label id="avp" title="Escolher foto ou GIF"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-8 8"/></svg><input type="file" id="avf" accept="image/*" hidden></label><input id="name" placeholder="Seu nome" maxlength="24"></div>
-    <div class="hint">Clique no círculo para colocar uma foto ou GIF (opcional).</div>
+    <div class="hint">Esta é a sua foto. Clique no círculo para trocar por uma foto ou GIF.</div>
     <button class="btn pri" id="go">Criar sala</button>
     <div class="or" id="or"><span>ou</span></div>
     <label id="cl">CÓDIGO DA SALA</label>
@@ -278,6 +316,20 @@ header{border-bottom:2px solid;border-image:linear-gradient(90deg,#00b4d0,#38d26
   </div>
 </div>
 
+<div id="dev"><button id="devb" type="button"><span class="dav" id="deva">N</span><span>Desenvolvido por <b id="devn">Novaak</b></span></button>
+  <div id="devc" class="hide">
+    <div class="dban"></div>
+    <div class="dhead"><div class="avw"><span class="dav big" id="deva2">N</span><i class="sdot" id="devd"></i></div><div class="dbub hide" id="devcs"></div></div>
+    <div class="dbody">
+      <div class="dn" id="devn2">Novaak</div>
+      <div class="du"><span id="devu"></span><span class="dtag hide" id="devtag"></span></div>
+      <div class="ds" id="devs"></div>
+      <div class="dsep"></div>
+      <div class="dl">Bio</div><div class="dtx" id="devbio"></div>
+      <div class="dl">Membro desde</div><div class="dtx" id="devsince"></div>
+      <div class="dr"><button class="btn" id="devcp">Copiar usuário</button><a class="btn" id="devl" target="_blank" rel="noopener" style="display:none">Abrir perfil</a></div>
+    </div></div></div>
+
 <script>
 const $=s=>document.querySelector(s);
 const IC={
@@ -293,7 +345,7 @@ const colors=['#00b4d0','#38d26a','#f59e0b','#ec4899','#38bdf8','#f97316'];
 const col=s=>colors[[...s].reduce((a,c)=>a+c.charCodeAt(0),0)%colors.length];
 const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
-let ws,me,myName,roomId,peers={},local={},pingT,owner,restrict=false,left=0,myPass='',AC,rec,chunks;
+let ws,me,myName,roomId,peers={},local={},pingT,owner,restrict=false,lockMic=false,left=0,myPass='',AC,rec,chunks;
 let ICE={iceServers:[{urls:'stun:stun.l.google.com:19302'}]}; // p/ produção, adicione um servidor TURN
 
 // ---------- Landing ----------
@@ -331,8 +383,8 @@ async function connect(){
   }catch(e){sys('Não foi possível conectar ao servidor.')}
 }
 function on(m){
-  if(m.t==='welcome'){const w=$('#wait');w&&w.remove();$('#st').textContent='Conectado';me=m.id;owner=m.owner;restrict=m.restrict;m.peers.forEach(p=>mk(p.id,p.name,p.av));ui()}
-  else if(m.t==='join'){mk(m.id,m.name,m.av);sys(m.name+' entrou');beep(660);renderPeople()}
+  if(m.t==='welcome'){const w=$('#wait');w&&w.remove();$('#st').textContent='Conectado';me=m.id;lockMic=!!m.muted;owner=m.owner;restrict=m.restrict;m.peers.forEach(p=>{mk(p.id,p.name,p.av);peers[p.id].srvMuted=!!p.muted});ui()}
+  else if(m.t==='join'){mk(m.id,m.name,m.av);peers[m.id].srvMuted=!!m.muted;sys(m.name+' entrou');beep(660);renderPeople()}
   else if(m.t==='leave')drop(m.id,true);
   else if(m.t==='sig')sig(m.from,m.d);
   else if(m.t==='chat'){chat(m);if(m.name!==myName)beep(440)}
@@ -346,6 +398,11 @@ function on(m){
   else if(m.t==='req'){reqCard(m.id,m.name,m.av);beep(520)}
   else if(m.t==='reqx'){const e=document.getElementById('rq'+m.id);e&&e.remove()}
   else if(m.t==='ended'){left=1;ask('Sala encerrada','O dono encerrou esta sala.',{ok:'Voltar ao início',cancel:0}).then(()=>location.href='/')}
+  else if(m.t==='banned'){left=1;ask('Você foi banido','O dono desta sala baniu você.',{ok:'Voltar ao início',cancel:0}).then(()=>location.href='/')}
+  else if(m.t==='muted'){
+    if(m.id===me){lockMic=m.v;if(m.v){const t=local.mic&&local.mic.getAudioTracks()[0];if(t){t.enabled=false;$('#bmic').innerHTML=IC.micoff;$('#bmic').classList.add('off')}toast('O dono silenciou seu microfone')}else toast('O dono liberou seu microfone. Clique no microfone para falar.')}
+    else{const p=peers[m.id];if(p){p.srvMuted=m.v;muteEls(m.id)}}
+    renderPeople()}
   else if(m.t==='kicked'){left=1;ask('Você foi removido','O dono da sala removeu você.',{ok:'Voltar ao início',cancel:0}).then(()=>location.href='/')}
   else if(m.t==='mod'){
     if(m.a==='mute'){const t=local.mic&&local.mic.getAudioTracks()[0];if(t){t.enabled=false;$('#bmic').innerHTML=IC.micoff;$('#bmic').classList.add('off')}toast('O dono silenciou seu microfone')}
@@ -366,7 +423,7 @@ function mk(id,name,av){
       if(!document.getElementById('t'+st.id)){addTile(st,name,false);p.tiles.add(st.id);const vv=document.querySelector('#t'+st.id+' video');vv.dataset.peer=id;vv.muted=!!p.muted}
       st.onremovetrack=()=>{if(!st.getVideoTracks().length){rmTile(st.id);p.tiles.delete(st.id)}};
     }else if(!st.getVideoTracks().length||!st.getVideoTracks().length){
-      if(!document.getElementById('a'+st.id)){watch(st,id);const a=new Audio();a.id='a'+st.id;a.srcObject=st;a.autoplay=true;a.dataset.peer=id;a.muted=!!p.muted;document.body.appendChild(a)}
+      if(!document.getElementById('a'+st.id)){watch(st,id);const a=new Audio();a.id='a'+st.id;a.srcObject=st;a.autoplay=true;a.dataset.peer=id;a.muted=!!(p.muted||p.srvMuted);document.body.appendChild(a)}
     }
   };
   Object.values(local).forEach(s=>s&&s.getTracks().forEach(t=>pc.addTrack(t,s)));
@@ -403,7 +460,7 @@ function stop(kind){
 }
 $('#bshare').onclick=$('#bigshare').onclick=()=>toggle('screen');
 $('#bcam').onclick=()=>toggle('cam');
-$('#bmic').onclick=()=>{
+$('#bmic').onclick=()=>{if(lockMic)return toast('O dono da sala silenciou você. Só ele pode liberar o microfone.');
   const t=local.mic&&local.mic.getAudioTracks()[0];if(!t)return;
   t.enabled=!t.enabled;$('#bmic').innerHTML=t.enabled?IC.mic:IC.micoff;$('#bmic').classList.toggle('off',!t.enabled);
 };
@@ -432,7 +489,7 @@ function renderPeople(){
   const list=[{id:'me',name:myName+' (você)'},...Object.values(peers)];
   $('#cnt').textContent='— '+list.length;
   $('#people').innerHTML=list.map(p=>{const o=(p.id==='me'?me:p.id)===owner;
-    return `<div class="p" data-id="${p.id}">${avHTML(p.name,p.id==='me'?MYAV:p.av)}<div style="flex:1">${esc(p.name)} ${o?'<span class="tag">DONO</span>':''} ${p.muted?'<small title="Silenciado para você">🔇</small>':''}</div>${p.id!=='me'?`<button class="more" data-id="${p.id}" title="Opções">⋯</button>`:''}</div>`}).join('');
+    return `<div class="p" data-id="${p.id}">${avHTML(p.name,p.id==='me'?MYAV:p.av)}<div style="flex:1">${esc(p.name)} ${o?'<span class="tag">DONO</span>':''}${(p.id==='me'?lockMic:p.srvMuted)?'<span class="mi" title="Microfone silenciado pelo dono">'+IC.micoff+'</span>':''} ${p.muted?'<small title="Silenciado para você">🔇</small>':''}</div>${p.id!=='me'?`<button class="more" data-id="${p.id}" title="Opções">⋯</button>`:''}</div>`}).join('');
 }
 function chat(m){
   const d=document.createElement('div');d.className='m'+(m.name===myName?' me':'');
@@ -496,9 +553,9 @@ function toast(t){let b=$('#toasts');if(!b){b=document.createElement('div');b.id
 const ctx=document.createElement('div');ctx.className='ctx';document.body.append(ctx);
 function openCtx(id,x,y){
   const p=peers[id];if(!p)return;const boss=me&&me===owner;
-  const it=[[p.muted?'Reativar áudio dele para mim':'Silenciar para mim',()=>{p.muted=!p.muted;document.querySelectorAll(`[data-peer="${id}"]`).forEach(e=>e.muted=p.muted);renderPeople()}]];
-  if(boss)it.push(['—'],['Silenciar microfone',()=>send({t:'mod',id,a:'mute'})],['Parar transmissão',()=>send({t:'mod',id,a:'stop'})],
-    ['Tornar dono da sala',()=>send({t:'mod',id,a:'owner'})],['—'],['Expulsar da sala',()=>send({t:'kick',id}),'danger']);
+  const it=[[p.muted?'Reativar áudio dele para mim':'Silenciar para mim',()=>{p.muted=!p.muted;muteEls(id);renderPeople()}]];
+  if(boss)it.push(['—'],[p.srvMuted?'Liberar microfone':'Silenciar microfone',()=>send({t:'mod',id,a:p.srvMuted?'unmute':'mute'})],['Parar transmissão',()=>send({t:'mod',id,a:'stop'})],
+    ['Tornar dono da sala',()=>send({t:'mod',id,a:'owner'})],['—'],['Expulsar da sala',()=>send({t:'kick',id}),'danger'],['Banir da sala',()=>ask('Banir '+p.name,'Essa pessoa não poderá mais entrar nesta sala enquanto ela existir.',{ok:'Banir'}).then(v=>v&&send({t:'ban',id})),'danger']);
   ctx.innerHTML=`<div class="mh">${esc(p.name)}</div>`+it.map((v,n)=>v[0]==='—'?'<hr>':`<button data-i="${n}" class="${v[2]||''}">${v[0]}</button>`).join('');
   ctx._it=it;ctx.classList.add('open');
   ctx.style.left=Math.max(8,Math.min(x,innerWidth-ctx.offsetWidth-8))+'px';ctx.style.top=Math.max(8,Math.min(y,innerHeight-ctx.offsetHeight-8))+'px';
@@ -524,17 +581,47 @@ $('#bleave').onclick=()=>$('#bend').onclick();
 // ---------- Foto / GIF de perfil ----------
 let MYAV=localStorage.getItem('orbit-av')||'';
 const AVOK=/^data:image\/(png|jpe?g|gif|webp);base64,[A-Za-z0-9+/=]+$/;
-const avHTML=(name,u)=>u&&AVOK.test(u)?`<div class="av img" style="background-image:url(${u})"></div>`:`<div class="av" style="background:${col(name)}">${esc(name[0].toUpperCase())}</div>`;
+const avHTML=(name,u)=>`<div class="av img" style="background-image:url(${u&&AVOK.test(u)?u:'/logo.png'})"></div>`;
 const rd=f=>new Promise(r=>{const x=new FileReader();x.onload=()=>r(x.result);x.readAsDataURL(f)});
 async function shrink(f){const u=await rd(f),im=new Image();await new Promise(r=>{im.onload=r;im.src=u});
   const S=160,c=document.createElement('canvas');c.width=c.height=S;const g=c.getContext('2d');
   const k=Math.max(S/im.width,S/im.height),w=im.width*k,h=im.height*k;g.drawImage(im,(S-w)/2,(S-h)/2,w,h);return c.toDataURL('image/jpeg',.85)}
 function setAv(u){MYAV=u||'';try{localStorage.setItem('orbit-av',MYAV)}catch(e){}
-  const a=$('#avp');a.style.backgroundImage=MYAV?`url(${MYAV})`:'';a.classList.toggle('has',!!MYAV)}
+  const a=$('#avp');a.style.backgroundImage=`url(${MYAV||'/logo.png'})`;a.classList.add('has')}
 $('#avf').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;
   if(f.type==='image/gif'){if(f.size>300*1024)return toast('Esse GIF é grande demais (máx. 300 KB). Escolha um menor.');setAv(await rd(f))}
   else setAv(await shrink(f))};
 if(!AVOK.test(MYAV))MYAV='';setAv(MYAV);
+
+// ---------- Crédito do desenvolvedor (perfil do Discord) ----------
+// Para mostrar a foto e o status reais, coloque o seu ID numérico do Discord em id
+// e entre no servidor do Lanyard (discord.gg/lanyard), que libera a leitura pública do perfil.
+const DEV={name:'Novaak',user:'7criminalista',id:'1511297349664768020',avatar:'/novaak.png',status:'dnd',custom:'Ego alto, autoestima maior.',tag:'BHM',bio:'Developer',bioIcon:'/bio.png',since:'2 de jun. de 2026'};
+const ST={online:['Online','#38d26a'],idle:['Ausente','#f8dd38'],dnd:['Não perturbe','#f0475b'],offline:['Offline','#6b7f82']};
+const emo=t=>esc(t||'').replace(/&lt;(a?):(\w+):(\d+)&gt;/g,(m,a,n,id)=>`<img class="demo" alt=":${n}:" src="https://cdn.discordapp.com/emojis/${id}.${a?'gif':'png'}?size=48">`);
+function devSet(o){
+  $('#devn').textContent=$('#devn2').textContent=o.name;$('#devu').textContent=o.user;
+  ['#deva','#deva2'].forEach(q=>{const e=$(q);if(o.avatar){e.style.backgroundImage=`url(${o.avatar})`;e.textContent=''}else e.textContent=o.name[0].toUpperCase()});
+  const m=ST[o.status];$('#devs').innerHTML=m?`<i style="background:${m[1]}"></i>${m[0]}`:'';$('#devd').style.background=m?m[1]:'transparent';
+  const cs=$('#devcs');cs.innerHTML=emo(o.custom);cs.classList.toggle('hide',!o.custom);
+  const t=$('#devtag');t.innerHTML=(o.tagIcon?`<img class="tbd" alt="" src="${o.tagIcon}">`:'')+esc(o.tag||'');t.classList.toggle('hide',!o.tag);
+  $('#devbio').innerHTML=(o.bioIcon?`<img class="demo" alt="" src="${o.bioIcon}">`:'')+(emo(o.bio)||'—');$('#devsince').textContent=o.since||'—';
+}
+devSet(DEV);
+if(DEV.id){$('#devl').href='https://discord.com/users/'+DEV.id;$('#devl').style.display='';
+  // "Membro desde" = data de criação da conta, calculada a partir do próprio ID do Discord
+  try{DEV.since=new Date(Number((BigInt(DEV.id)>>22n)+1420070400000n)).toLocaleDateString('pt-BR',{day:'numeric',month:'short',year:'numeric'});devSet(DEV)}catch(e){}
+  // Perfil ao vivo via Lanyard (precisa estar no servidor discord.gg/lanyard). Atualiza a cada 60 s.
+  // Bio e etiqueta podem ser trocadas pelo Discord: mande ".set bio SeuTexto" e ".set tag BHM" para o bot do Lanyard.
+  const devSync=()=>fetch('https://api.lanyard.rest/v1/users/'+DEV.id).then(r=>r.json()).then(r=>{if(!r.success)return;
+    const u=r.data.discord_user,c=(r.data.activities||[]).find(x=>x.type===4),k=r.data.kv||{},g=u.primary_guild&&u.primary_guild.identity_enabled?u.primary_guild:null;
+    devSet({...DEV,name:u.global_name||u.username,user:u.username,status:r.data.discord_status,custom:c?((c.emoji?(c.emoji.id?`<${c.emoji.animated?'a':''}:${c.emoji.name}:${c.emoji.id}> `:c.emoji.name+' '):'')+(c.state||'')):'',bio:k.bio||DEV.bio,tag:g?g.tag:(k.tag||DEV.tag),tagIcon:g&&g.badge?`https://cdn.discordapp.com/clan-badges/${g.identity_guild_id}/${g.badge}.png?size=32`:'',
+      avatar:u.avatar?`https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.${u.avatar.startsWith('a_')?'gif':'png'}?size=128`:DEV.avatar})}).catch(()=>{});
+  devSync();setInterval(devSync,60000)}
+$('#devb').onclick=e=>{e.stopPropagation();$('#devc').classList.toggle('hide')};
+document.addEventListener('click',e=>{if(!$('#dev').contains(e.target))$('#devc').classList.add('hide')});
+$('#devcp').onclick=()=>navigator.clipboard.writeText(DEV.user).then(()=>{$('#devcp').textContent='Copiado!';setTimeout(()=>$('#devcp').textContent='Copiar usuário',1500)});
+function muteEls(id){const p=peers[id];if(!p)return;document.querySelectorAll('[data-peer="'+id+'"]').forEach(e=>{e.muted=e.tagName==='AUDIO'?!!(p.muted||p.srvMuted):!!p.muted})}
 </script>
 </body>
 </html>

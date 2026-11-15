@@ -31,14 +31,15 @@ const all = (set, o) => set.forEach(w => w.send(J(o)));
 
 function enter(ws, set) {
   if (!set.size) set.owner = ws.id;
-  set.ok.add(ws.cid);
-  ws.send(J({ t: 'welcome', id: ws.id, owner: set.owner, restrict: set.restrict,
-    peers: [...set.values()].map(w => ({ id: w.id, name: w.name, av: w.av })) }));
-  all(set, { t: 'join', id: ws.id, name: ws.name, av: ws.av });
+  set.ok.add(ws.cid); ws.muted = set.muted.has(ws.cid);
+  ws.send(J({ t: 'welcome', id: ws.id, owner: set.owner, restrict: set.restrict, muted: ws.muted,
+    peers: [...set.values()].map(w => ({ id: w.id, name: w.name, av: w.av, muted: w.muted })) }));
+  all(set, { t: 'join', id: ws.id, name: ws.name, av: ws.av, muted: ws.muted });
   set.set(ws.id, ws);
 }
 
-wss.on('connection', ws => {
+wss.on('connection', (ws, req) => {
+  ws.ip = String(req.headers['x-forwarded-for'] || req.socket.remoteAddress || '').split(',')[0].trim();
   ws.on('message', raw => {
     let m; try { m = JSON.parse(raw); } catch { return; }
     if (m.t === 'join' && !ws.room) {
@@ -46,7 +47,8 @@ wss.on('connection', ws => {
       ws.name = String(m.name || 'Anônimo').slice(0, 24); ws.av = okAv(String(m.av || ''));
       ws.id = String(++n); ws.cid = String(m.cid || 'x' + n).slice(0, 60);
       let set = rooms.get(room);
-      if (!set) { set = Object.assign(new Map(), { owner: null, restrict: false, ok: new Set(), pend: new Map() }); rooms.set(room, set); }
+      if (!set) { set = Object.assign(new Map(), { owner: null, restrict: false, ok: new Set(), pend: new Map(), ban: new Set(), banip: new Set(), muted: new Set() }); rooms.set(room, set); }
+      if (set.ban.has(ws.cid) || (ws.ip && set.banip.has(ws.ip))) { ws.send(J({ t: 'banned' })); return ws.close(); }
       ws.room = room;
       if (!set.size || set.ok.has(ws.cid)) return enter(ws, set);   // 1º a entrar vira dono; já aprovados voltam direto
       ws.pending = true; set.pend.set(ws.id, ws);
@@ -69,9 +71,18 @@ wss.on('connection', ws => {
     else if (m.t === 'mod') {
       const w = set.get(m.id); if (!w || w === ws) return;
       if (m.a === 'owner') { set.owner = m.id; all(set, { t: 'owner', id: m.id }); }
-      else if (m.a === 'mute' || m.a === 'stop') w.send(J({ t: 'mod', a: m.a }));
+      else if (m.a === 'stop') w.send(J({ t: 'mod', a: 'stop' }));
+      else if (m.a === 'mute' || m.a === 'unmute') {   // silenciar "estilo Discord": só o dono libera
+        const v = m.a === 'mute'; w.muted = v; v ? set.muted.add(w.cid) : set.muted.delete(w.cid);
+        all(set, { t: 'muted', id: w.id, v });
+      }
     }
     else if (m.t === 'kick') { const w = set.get(m.id); if (w && w !== ws) { set.ok.delete(w.cid); w.send(J({ t: 'kicked' })); w.close(); } }
+    else if (m.t === 'ban') {   // banimento vale enquanto a sala existir (por dispositivo e por IP)
+      const w = set.get(m.id); if (!w || w === ws) return;
+      set.ban.add(w.cid); w.ip && set.banip.add(w.ip); set.ok.delete(w.cid);
+      w.send(J({ t: 'banned' })); w.close();
+    }
     else if (m.t === 'end') {
       rooms.delete(ws.room);
       const all2 = [...set.values(), ...set.pend.values()];
