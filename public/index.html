@@ -244,6 +244,32 @@ header{border-bottom:2px solid;border-image:linear-gradient(90deg,#00b4d0,#38d26
 
 .tbd{width:14px;height:14px;vertical-align:-2px;margin-right:4px;border-radius:3px}
 .dtag{display:inline-flex;align-items:center}
+
+/* ===== Celular: barra de controles dentro do fluxo (sem flutuar/sobrepor) ===== */
+@media(max-width:900px){
+ #room{height:100%;overflow-y:auto;display:flex;flex-direction:column}
+ #room>*{flex:none}
+ #room>header{height:60px}
+ #stagebox{display:flex;flex-direction:column;overflow:visible;margin:10px 14px}
+ #stage{padding:8px;min-height:0;grid-auto-rows:minmax(190px,1fr);grid-template-columns:1fr}
+ #stage:empty{display:none}
+ #empty{position:static;flex:1;padding:26px 16px 8px;gap:10px}
+ #empty::before{width:84px;height:84px;border-radius:20px}
+ #empty h2{font-size:18px}
+ #empty .inv{display:none}
+ #bar{position:static;transform:none;width:auto;max-width:none;margin:8px;padding:10px;border-radius:20px;gap:8px;flex-wrap:wrap;justify-content:center;box-shadow:none;background:#0b1618}
+ #bar .sep{display:none}
+ #bar{order:2}
+ .ib{width:44px;height:44px;flex:none}
+ .ib.pill{width:auto;padding:0 12px}
+ .ib.end{width:52px}
+ .rx{gap:6px;flex-basis:100%;justify-content:center}
+ .rx button{width:42px;height:42px}
+ .menu{bottom:52px;left:0;transform:none;width:min(230px,80vw)}
+ @keyframes pop{from{opacity:0;transform:translateY(8px)}}
+ .ib[data-tip]:hover::after{display:none}
+ #chat{height:300px;margin:0 14px 14px}
+}
 </style>
 </head>
 <body>
