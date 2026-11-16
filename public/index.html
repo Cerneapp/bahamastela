@@ -270,6 +270,12 @@ header{border-bottom:2px solid;border-image:linear-gradient(90deg,#00b4d0,#38d26
  .ib[data-tip]:hover::after{display:none}
  #chat{height:300px;margin:0 14px 14px}
 }
+
+/* ===== Avisos (toast) ===== */
+#toasts{top:14px;width:min(calc(100vw - 24px),400px);padding-top:env(safe-area-inset-top,0px);pointer-events:none}
+.toast{pointer-events:auto;width:100%;display:flex;align-items:flex-start;gap:12px;background:#0c191bf7;border:1px solid #1e3a3f;padding:13px 16px 13px 18px;overflow:hidden;border-radius:14px;box-shadow:inset 4px 0 0 var(--gold),0 18px 50px #000c;font-size:14px;line-height:1.45;color:var(--t);backdrop-filter:blur(14px);animation:tin .25s cubic-bezier(.2,.8,.2,1);cursor:pointer}
+.toast::before{content:'!';flex:none;width:22px;height:22px;border-radius:50%;background:var(--gold);color:#1b1700;font-weight:800;font-size:13px;display:grid;place-items:center;margin-top:1px}
+@keyframes tin{from{opacity:0;transform:translateY(-14px) scale(.97)}}
 </style>
 </head>
 <body>
@@ -471,13 +477,15 @@ function unshareStream(s){Object.values(peers).forEach(p=>p.pc.getSenders().forE
 async function toggle(kind){
   const btn=kind==='screen'?$('#bshare'):$('#bcam');
   if(local[kind]){stop(kind);return}
+  if(kind==='screen'&&!(navigator.mediaDevices&&navigator.mediaDevices.getDisplayMedia))
+    return toast('Seu navegador não permite compartilhar a tela (celulares não suportam). Transmita pelo computador; no celular dá para assistir ou usar a câmera.');
   try{
     const s=kind==='screen'
       ?await navigator.mediaDevices.getDisplayMedia({video:vc(),audio:true})
       :await navigator.mediaDevices.getUserMedia({video:{width:1280,height:720}});
     local[kind]=s;shareStream(s);addTile(s,'Você ('+(kind==='screen'?'tela':'câmera')+')',true);
     btn.classList.add('on');s.getVideoTracks()[0].onended=()=>stop(kind);
-  }catch(e){console.warn(e)}
+  }catch(e){console.warn(e);if(e&&e.name!=='NotAllowedError'&&e.name!=='AbortError')toast('Não foi possível iniciar a transmissão.')}
 }
 function stop(kind){
   const s=local[kind];if(!s)return;
@@ -575,7 +583,7 @@ function ask(title,text,{input,ok='OK',cancel='Cancelar'}={}){return new Promise
   o.onkeydown=e=>{if(e.key==='Enter')done(i?i.value:true);if(e.key==='Escape')done(null)};
 })}
 function toast(t){let b=$('#toasts');if(!b){b=document.createElement('div');b.id='toasts';document.body.append(b)}
-  const d=document.createElement('div');d.className='toast';d.textContent=t;b.append(d);setTimeout(()=>d.remove(),3500)}
+  const d=document.createElement('div');d.className='toast';d.textContent=t;d.onclick=()=>d.remove();b.append(d);setTimeout(()=>d.remove(),Math.max(3500,t.length*70))}
 const ctx=document.createElement('div');ctx.className='ctx';document.body.append(ctx);
 function openCtx(id,x,y){
   const p=peers[id];if(!p)return;const boss=me&&me===owner;
